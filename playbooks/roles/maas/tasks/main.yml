@@ -16,6 +16,15 @@
 - name: dpkg reconfigure
   command: dpkg-reconfigure locales
 
+- name: install python-software-properties
+  apt: python-software-properties state=present
+
+- name: add repogitory cloud-archive:tools
+  command: apt-add-repository cloud-archive:tools
+
+- name: add repogitory ppa:maas-maintainers/dailybuilds
+  command: apt-add-repository ppa:maas-maintainers/dailybuilds
+
 - name: apt-get update
   apt: update_cache=yes
 
