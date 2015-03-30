@@ -1,0 +1,38 @@
+- name: generate locale
+  command: /usr/sbin/locale-gen
+
+- name: export LANGUAGE
+  command: export LANGUAGE=en_US.UTF-8
+
+- name: export LANG
+  command: export export LANG=en_US.UTF-8
+
+- name: export LC_ALL
+  command: export LC_ALL=en_US.UTF-8
+
+- name: locale gen
+  command: locale-gen en_US.UTF-8
+
+- name: dpkg reconfigure
+  command: dpkg-reconfigure locales
+
+- name: apt-get update
+  apt: update_cache=yes
+
+- name: apt-get upgrade
+  apt: upgrade=dist
+
+- name: install postgresql
+  apt: name=postgresql state=present
+
+- name: pg_createcluster
+  command: /usr/bin/pg_createcluster 9.3 name start
+
+- name: install maas
+  apt: name=maas state=present
+
+- name: install maas-dhcp
+  apt: name=maas-dhcp state=present
+
+- name: install maas-dns
+  apt: name=maas-dns state=present

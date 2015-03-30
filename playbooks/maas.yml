@@ -1,0 +1,6 @@
+- name: maas install
+  hosts: maas-server
+  sudo: yes
+  user: ocp
+  roles:
+    - maas
