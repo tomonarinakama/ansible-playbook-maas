@@ -3,26 +3,26 @@
 
 - name: locale gen
   command: /usr/sbin/locale-gen en_US.UTF-8
-    environment:
-      LANGUAGE: en_US.UTF-8
-      LANG: en_US.UTF-8
-      LC_ALL: en_US.UTF-8
+  environment:
+    LANGUAGE: en_US.UTF-8
+    LANG: en_US.UTF-8
+    LC_ALL: en_US.UTF-8
 
 - name: dpkg reconfigure
   command: /usr/sbin/dpkg-reconfigure locales
-    environment:
-      LANGUAGE: en_US.UTF-8
-      LANG: en_US.UTF-8
-      LC_ALL: en_US.UTF-8
+  environment:
+    LANGUAGE: en_US.UTF-8
+    LANG: en_US.UTF-8
+    LC_ALL: en_US.UTF-8
 
 - name: install python-software-properties
-  apt: python-software-properties state=present
+  apt: name=python-software-properties state=present force=yes
 
-- name: add repogitory cloud-archive:tools
-  command: apt-add-repository cloud-archive:tools
+- name: install software-properties-common
+  apt: name=software-properties-common state=present force=yes
 
 - name: add repogitory ppa:maas-maintainers/dailybuilds
-  command: apt-add-repository ppa:maas-maintainers/dailybuilds
+  command: /usr/bin/apt-add-repository -y "ppa:maas-maintainers/dailybuilds"
 
 - name: apt-get update
   apt: update_cache=yes
@@ -34,7 +34,7 @@
   apt: name=postgresql state=present
 
 - name: pg_createcluster
-  command: /usr/bin/pg_createcluster 9.3 name start
+  command: /usr/bin/pg_createcluster 9.3 start
 
 - name: install maas
   apt: name=maas state=present
