@@ -1,20 +1,19 @@
 - name: generate locale
   command: /usr/sbin/locale-gen
 
-- name: export LANGUAGE
-  command: export LANGUAGE=en_US.UTF-8
-
-- name: export LANG
-  command: export export LANG=en_US.UTF-8
-
-- name: export LC_ALL
-  command: export LC_ALL=en_US.UTF-8
-
 - name: locale gen
-  command: locale-gen en_US.UTF-8
+  command: /usr/sbin/locale-gen en_US.UTF-8
+    environment:
+      LANGUAGE=en_US.UTF-8
+      LANG=en_US.UTF-8
+      LC_ALL=en_US.UTF-8
 
 - name: dpkg reconfigure
-  command: dpkg-reconfigure locales
+  command: /usr/sbin/dpkg-reconfigure locales
+    environment:
+      LANGUAGE=en_US.UTF-8
+      LANG=en_US.UTF-8
+      LC_ALL=en_US.UTF-8
 
 - name: install python-software-properties
   apt: python-software-properties state=present
